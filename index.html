@@ -46,9 +46,9 @@
   .scope span{font-family:"IBM Plex Mono",monospace;font-size:.78rem;font-weight:600;padding:7px 10px;border:1.5px solid var(--ink);border-radius:999px;background:var(--surface)}
   .scope span.solid{background:var(--chip);color:var(--chip-ink)}
   .hero-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
-  .hero-cta a{display:inline-block;font-weight:700;text-decoration:none;padding:12px 20px;border-radius:999px;min-height:44px;line-height:1.2}
-  .hero-cta a.primary{background:var(--chip);color:var(--chip-ink)}
-  .hero-cta a.ghost{border:1.5px solid var(--ink);background:var(--surface)}
+  .hero-cta a{display:inline-block;font-weight:700;text-decoration:none;padding:12px 20px;border-radius:10px;min-height:44px;line-height:1.2;text-transform:uppercase;letter-spacing:.04em;color:#fff}
+  .hero-cta a.primary{background:var(--hot);border:1.5px solid var(--hot)}
+  .hero-cta a.slate{background:#627C8C;border:1.5px solid #627C8C}
 
   section{margin-top:30px}
   .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:16px}
@@ -57,10 +57,10 @@
 
   /* Cards */
   .card{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
-  .card--slate{background:#627C8C;border-color:#627C8C;color:#fff}
-  .card--slate .place,.card--slate .desc{color:#eef3f6}
-  .card--slate .desc strong{color:#fff}
-  .card--slate .details li::before{color:#fff}
+  .card.card--slate{background:#627C8C;border-color:#627C8C;color:#fff}
+  .card.card--slate .place,.card.card--slate .desc{color:#fff}
+  .card.card--slate .desc strong{color:#fff}
+  .card.card--slate .details li::before{color:#fff}
   .card-top{padding:18px 20px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
   .badge{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:5px 9px;border-radius:5px}
   .badge.hot{background:var(--hot);color:#fff}
@@ -120,7 +120,7 @@
     <p class="foryou"><strong>This page was made for you</strong> &mdash; by someone who cares about you and wants you around. No sign-up, no lecture. Just the rooms where the young sober people are, and the stuff that makes it actually fun.</p>
     <div class="hero-cta">
       <a class="primary" href="#meetings">See this week&rsquo;s meetings ↓</a>
-      <a class="ghost" href="#tonight">Tonight, 10pm, from the couch ↓</a>
+      <a class="slate" href="#tonight">Tonight, 10pm, from the couch ↓</a>
     </div>
     <div class="scope">
       <span class="solid">17 meetings a week</span>
