@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<meta name="description" content="AA meetings in San Diego for people in their 20s — every GSDYPAA young people's meeting, nightly online options, upcoming conferences, and free reading. Made for one person, refreshed weekly." />
+<link rel="icon" href="data:," />
+<title>Young &amp; Sober — San Diego</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700&family=Alegreya+Sans+SC:wght@500;700&family=IBM+Plex+Mono:wght@500;600&family=Unica+One&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#edf1f4; --surface:#ffffff; --surface2:#e2e9ee; --ink:#2B3034; --muted:#627C8C; --line:#B9C7D2;
+    --accent:#627C8C; --accent-ink:#46586a; --accent-bg:#dfe8ef; --hot:#E93C35; --hot-bg:#fdeceb;
+    --green:#166534; --green-bg:#dcfce7; --amber-bg:#fef9e2; --amber-line:#eab308; --amber-ink:#713f12;
+    --chip:#2B3034; --chip-ink:#fff; --shadow:0 1px 2px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#2B3034; --surface:#353c41; --surface2:#414a51; --ink:#e9eef2; --muted:#B9C7D2; --line:#4b555d;
+      --accent:#B9C7D2; --accent-ink:#B9C7D2; --accent-bg:#39434b; --hot:#E93C35; --hot-bg:#452624;
+      --green:#4ade80; --green-bg:#122b18; --amber-bg:#2a2306; --amber-line:#a16207; --amber-ink:#fde68a;
+      --chip:#e9eef2; --chip-ink:#2B3034; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Alegreya Sans",system-ui,-apple-system,Segoe UI,sans-serif;font-size:16.5px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:880px;margin:0 auto;padding:0 18px 56px}
+
+  /* Masthead */
+  .topbar{border-bottom:3px solid var(--ink);padding:22px 0 16px}
+  .meta{font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 14px}
+  .meta b{color:var(--ink);font-weight:600}
+  .meta .dot{color:var(--accent)}
+  h1{font-family:"Unica One",sans-serif;font-weight:400;font-size:clamp(3rem,10vw,5rem);line-height:.9;letter-spacing:.01em;text-transform:uppercase;margin:10px 0 6px}
+  h1 em{font-style:normal;color:var(--hot)}
+  .lede{font-size:1.12rem;color:var(--muted);max-width:34em;margin:0}
+  .lede strong{color:var(--ink)}
+  .foryou{margin-top:18px;background:var(--accent-bg);border:1.5px solid var(--accent);border-left:6px solid var(--accent);border-radius:10px;padding:14px 18px;font-size:1.02rem}
+  .foryou strong{color:var(--accent-ink)}
+  .scope{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .scope span{font-family:"IBM Plex Mono",monospace;font-size:.78rem;font-weight:600;padding:7px 10px;border:1.5px solid var(--ink);border-radius:999px;background:var(--surface)}
+  .scope span.solid{background:var(--chip);color:var(--chip-ink)}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .hero-cta a{display:inline-block;font-weight:700;text-decoration:none;padding:12px 20px;border-radius:999px;min-height:44px;line-height:1.2}
+  .hero-cta a.primary{background:var(--chip);color:var(--chip-ink)}
+  .hero-cta a.ghost{border:1.5px solid var(--ink);background:var(--surface)}
+
+  section{margin-top:30px}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:16px}
+  h2.sec{font-family:"Unica One",sans-serif;font-weight:400;font-size:1.9rem;text-transform:uppercase;letter-spacing:.03em;margin:0;line-height:1}
+  .sec-head p{margin:0;font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;text-align:right}
+
+  /* Cards */
+  .card{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
+  .card-top{padding:18px 20px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .badge{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:5px 9px;border-radius:5px}
+  .badge.hot{background:var(--hot);color:#fff}
+  .badge.posted{background:var(--surface2);color:var(--muted)}
+  .badge.zoom{background:var(--accent-bg);color:var(--accent-ink)}
+  .card h3{font-family:"Unica One",sans-serif;font-weight:400;font-size:2rem;line-height:1.02;text-transform:uppercase;margin:10px 20px 2px}
+  .card h3 a{text-decoration:none}
+  .card h3 a:hover{text-decoration:underline}
+  .card .place{margin:0 20px;color:var(--muted);font-weight:600;font-size:1rem}
+  .card .desc{margin:8px 20px 0;color:var(--muted);max-width:38em}
+  .card .desc strong{color:var(--ink)}
+  .day{margin:18px 20px 0;border-top:1px solid var(--line)}
+  .day:first-of-type{margin-top:16px}
+  .day h4{font-family:"Alegreya Sans SC","Alegreya Sans",sans-serif;font-size:1.25rem;text-transform:uppercase;letter-spacing:.04em;margin:14px 0 2px;color:var(--accent-ink)}
+  .day p.only{margin:2px 0 12px;color:var(--muted);font-size:.95rem}
+  .mtg{display:grid;grid-template-columns:118px 1fr auto;gap:12px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line)}
+  .mtg:last-child{border-bottom:none}
+  .mtg .when{font-family:"IBM Plex Mono",monospace;font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em;color:var(--accent-ink)}
+  .mtg .what{font-family:"Alegreya Sans SC","Alegreya Sans",sans-serif;font-weight:700;font-size:1.05rem}
+  .mtg .time{font-family:"IBM Plex Mono",monospace;font-size:.92rem;font-weight:600;white-space:nowrap}
+  .mtg .sub{grid-column:2 / -1;color:var(--muted);font-size:.92rem;margin-top:-6px}
+  .details{margin:0 20px 18px;padding:0;list-style:none}
+  .details li{padding:7px 0 7px 22px;position:relative;border-top:1px dashed var(--line);font-size:.97rem}
+  .details li::before{content:"—";position:absolute;left:0;color:var(--accent);font-weight:700}
+  .source{margin:0;padding:13px 20px;background:var(--accent-bg);border-top:1.5px solid var(--line);font-size:.94rem;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline}
+  .source .k{font-family:"IBM Plex Mono",monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);font-weight:600}
+  .source a{font-weight:700}
+  .note{margin:16px 20px 20px;background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:.95rem;color:var(--muted)}
+  .note strong{color:var(--ink)}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .mini{background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow)}
+  .mini h3{margin:0 0 2px;font-size:1.14rem}
+  .mini h3 a{text-decoration:none}
+  .mini h3 a:hover{text-decoration:underline}
+  .mini .role{font-family:"IBM Plex Mono",monospace;font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);font-weight:600;margin-bottom:8px}
+  .mini p{margin:0;color:var(--muted);font-size:.96rem}
+  .mini p + p{margin-top:8px}
+  .mini .via{margin-top:10px;font-size:.84rem;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+
+  footer{margin-top:36px;border-top:2px solid var(--ink);padding-top:16px;color:var(--muted);font-size:.92rem;display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
+  footer a{font-weight:600}
+  @media (max-width:640px){
+    .grid{grid-template-columns:1fr}
+    .mtg{grid-template-columns:96px 1fr}
+    .mtg .time{grid-column:2}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="topbar">
+    <div class="meta"><span><b>Updated</b> Mon, Nov 23, 2026</span><span class="dot">●</span><span>San Diego County</span><span class="dot">●</span><span>Refreshed weekly</span></div>
+    <h1>Young &amp; <em>Sober</em><br>in San Diego</h1>
+    <p class="lede">If AA felt boring, you were probably in the <strong>wrong room</strong>. San Diego has a whole young people&rsquo;s AA scene &mdash; meetings full of people in their 20s, sober dances, campouts, and a conference circuit. AA defines &ldquo;young people&rdquo; as under 30, but as GSDYPAA puts it, it&rsquo;s for the young and the young at heart. Same program, much better company.</p>
+    <p class="foryou"><strong>This page was made for you</strong> &mdash; by someone who cares about you and wants you around. No sign-up, no lecture. Just the rooms where the young sober people are, and the stuff that makes it actually fun.</p>
+    <div class="hero-cta">
+      <a class="primary" href="#meetings">See this week&rsquo;s meetings ↓</a>
+      <a class="ghost" href="#tonight">Tonight, 10pm, from the couch ↓</a>
+    </div>
+    <div class="scope">
+      <span class="solid">17 meetings a week</span>
+      <span>Free &middot; no dues</span>
+      <span>Open meetings welcome anyone</span>
+      <span>San Diego County</span>
+    </div>
+  </header>
+
+  <!-- TONIGHT -->
+  <section id="tonight">
+    <div class="sec-head"><h2 class="sec">Every single night</h2><p>10:00 pm &middot; Zoom</p></div>
+    <div class="card">
+      <div class="card-top"><span class="badge hot">Nightly</span><span class="badge zoom">Online</span></div>
+      <h3><a href="https://zoom.us/j/5311946873">Just a F***ing Rogue AA Meeting</a></h3>
+      <p class="place">Every night, 10:00&ndash;11:00pm &middot; on Zoom</p>
+      <p class="desc">The meeting that&rsquo;s always there. Late night, young crowd, no driving required &mdash; the easiest possible first meeting, and a standing option for any night that gets hard.</p>
+      <p class="source"><span class="k">Join</span><a href="https://zoom.us/j/5311946873">zoom.us/j/5311946873</a><span>&middot;</span><span>Camera on or off &mdash; listening counts.</span></p>
+    </div>
+  </section>
+
+  <!-- MEETINGS -->
+  <section id="meetings">
+    <div class="sec-head"><h2 class="sec">This week&rsquo;s meetings</h2><p>From GSDYPAA&rsquo;s own calendar</p></div>
+    <div class="card">
+      <div class="card-top"><span class="badge hot">Young people</span><span class="badge posted">GSDYPAA &middot; mirrored from the Central Office</span></div>
+      <h3>All 17, day by day</h3>
+      <p class="place">San Diego&rsquo;s young people&rsquo;s AA meetings, as listed by Greater San Diego Young People in AA</p>
+      <p class="desc">These rooms run on <strong>upbeat energy, callouts during readings, and a heavy emphasis on inclusivity and fellowship</strong> &mdash; that&rsquo;s GSDYPAA&rsquo;s own description, and it&rsquo;s why they don&rsquo;t feel like the meeting you sat through yesterday. Walk into any open meeting; nobody will ask why you&rsquo;re there.</p>
+
+      <div class="day">
+        <h4>Sunday</h4>
+        <div class="mtg"><span class="when">6:00 pm</span><span class="what">NC Women&rsquo;s Literature Study</span><span class="time"><a href="https://zoom.us/j/83571331518">Zoom</a></span><span class="sub">Literature study &middot; online</span></div>
+        <div class="mtg"><span class="when">6:30 pm</span><span class="what">Sunday Refresh</span><span class="time">5998 Alcala Park Way</span><span class="sub">San Diego, 92110</span></div>
+        <div class="mtg"><span class="when">8:00 pm</span><span class="what">East County Young Peoples Rule 62</span><span class="time">5940 Kelton Ave</span><span class="sub">La Mesa, 91942</span></div>
+        <div class="mtg"><span class="when">8:00 pm</span><span class="what">Willing to Grow, Young People&rsquo;s Meeting</span><span class="time">1906 Oceanside Blvd</span><span class="sub">Oceanside, 92054</span></div>
+      </div>
+
+      <div class="day">
+        <h4>Monday</h4>
+        <div class="mtg"><span class="when">6:30 pm</span><span class="what">Twisted Youth</span><span class="time">4198 Mission Ave</span><span class="sub">Oceanside, 92057</span></div>
+        <div class="mtg"><span class="when">8:00 pm</span><span class="what">Normal Heights Young Peoples Step Study</span><span class="time">4650 Mansfield St</span><span class="sub">Normal Heights, San Diego, 92116 &middot; step study</span></div>
+      </div>
+
+      <div class="day">
+        <h4>Tuesday</h4>
+        <p class="only">No daytime young people&rsquo;s meeting listed &mdash; the nightly Rogue Zoom at 10pm is the Tuesday option.</p>
+      </div>
+
+      <div class="day">
+        <h4>Wednesday</h4>
+        <div class="mtg"><span class="when">8:00 pm</span><span class="what">Little Italy Young Peoples</span><span class="time">3930 Fourth Ave</span><span class="sub">San Diego, 92103</span></div>
+        <div class="mtg"><span class="when">9:00 pm</span><span class="what">Bonita Young Peoples</span><span class="time">5080 Bonita Rd</span><span class="sub">Bonita, 91902</span></div>
+        <div class="mtg"><span class="when">9:00 pm</span><span class="what">Young and Restless</span><span class="time">131 Richmar Ave</span><span class="sub">San Marcos, 92069</span></div>
+      </div>
+
+      <div class="day">
+        <h4>Thursday</h4>
+        <p class="only">No daytime young people&rsquo;s meeting listed &mdash; the nightly Rogue Zoom at 10pm is the Thursday option.</p>
+      </div>
+
+      <div class="day">
+        <h4>Friday</h4>
+        <div class="mtg"><span class="when">9:00 am</span><span class="what">Big Book Study</span><span class="time">4198 Mission Ave</span><span class="sub">Oceanside, 92057</span></div>
+        <div class="mtg"><span class="when">7:30 pm</span><span class="what">Pacific Beach Young People</span><span class="time">Hibiscus Ln</span><span class="sub">Pacific Beach, San Diego, 92109</span></div>
+        <div class="mtg"><span class="when">7:30 pm</span><span class="what">Young Peoples</span><span class="time">1430 N Coast Hwy 101</span><span class="sub">Encinitas, 92024</span></div>
+        <div class="mtg"><span class="when">8:30 pm</span><span class="what">Under The Hill Young People</span><span class="time"><a href="https://zoom.us/j/4221216978">Zoom</a></span><span class="sub">Online &middot; per GSDYPAA&rsquo;s calendar (not in person)</span></div>
+      </div>
+
+      <div class="day">
+        <h4>Saturday</h4>
+        <div class="mtg"><span class="when">4:00 pm</span><span class="what">Keep Coming Back Group</span><span class="time">839 2nd St</span><span class="sub">Encinitas, 92024</span></div>
+        <div class="mtg"><span class="when">7:30 pm</span><span class="what">People&rsquo;s Rule 62</span><span class="time">1690 E Valley Pkwy</span><span class="sub">Escondido, 92027</span></div>
+        <div class="mtg"><span class="when">9:00 pm</span><span class="what">OB Young Peoples</span><span class="time">Voltaire &amp; W Point Loma</span><span class="sub">Ocean Beach, San Diego, 92107</span></div>
+      </div>
+
+      <p class="note"><strong>Meeting times move.</strong> This list is copied from <a href="https://www.gsdypaa.com/meetings">GSDYPAA&rsquo;s meetings calendar</a> &mdash; check there or the <a href="https://aasandiego.org/meetings">Central Office finder</a> before you drive over. Queer meetings: the GSDYPAA list is mirrored from the Central Office, where you can <a href="https://aasandiego.org/meetings/?tsml-day=any&amp;tsml-type=LGBTQ">filter for LGBTQ meetings</a>. And if the first room doesn&rsquo;t click, try another &mdash; that&rsquo;s normal, not a verdict on the program.</p>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section>
+    <div class="sec-head"><h2 class="sec">Coming up</h2><p>From GSDYPAA&rsquo;s events calendar</p></div>
+    <div class="card">
+      <div class="card-top"><span class="badge hot">Conferences</span><span class="badge posted">The big weekends</span></div>
+      <h3>Three trips worth planning around</h3>
+      <p class="place">Young people&rsquo;s AA conferences on GSDYPAA&rsquo;s calendar, Nov 2026 – May 2027</p>
+      <div class="day">
+        <div class="mtg"><span class="when">Dec 31 – Jan 3</span><span class="what"><a href="https://wacypaa.org">WACYPAA XXVIII: Arch to Freedom</a></span><span class="time">Salt Lake City, UT</span><span class="sub">New Year&rsquo;s weekend &middot; Western Area Conference of Young People in AA</span></div>
+        <div class="mtg"><span class="when">Mar 25 – 28</span><span class="what"><a href="https://www.acypaa.org/event-details/54th-acypaa-roundup">ACYPAA 54</a></span><span class="time">Riverside, CA</span><span class="sub">All California Young People in AA &middot; 54th roundup</span></div>
+        <div class="mtg"><span class="when">Apr 15 – 18</span><span class="what"><a href="https://acypaa.org">ACYPAA liv</a></span><span class="time">Ontario, CA</span><span class="sub">Delta Hotels Ontario Airport, 2200 E Holt Blvd &middot; &ldquo;State of Mental Goose Flesh&rdquo; &mdash; AA meetings, DJs, yoga, games &amp; more</span></div>
+      </div>
+      <p class="note"><strong>Nothing local and dated on the calendar right now</strong> &mdash; GSDYPAA&rsquo;s events page is still showing its last dance (Sep 5) as the &ldquo;next event,&rdquo; and there&rsquo;s no December dance posted yet. Their dances run meeting at 7pm, dance 8:30&ndash;11:30pm, about $10 at the door &mdash; and the annual Burning Bear campout in Campo (meetings, live DJs, yoga, games, camping) ran Sep 25&ndash;27 this year, with 2027 dates not yet posted. This page checks the calendar every week, so the next dance and the next Burning Bear will land here when they&rsquo;re announced.</p>
+    </div>
+    <div class="card">
+      <div class="card-top"><span class="badge hot">Get involved</span><span class="badge posted">Service, not just showing up</span></div>
+      <h3>Join the committee</h3>
+      <p class="place">GSDYPAA runs on young sober people taking commitments</p>
+      <ul class="details">
+        <li><strong>Business meeting</strong> &mdash; 2nd + 4th Mondays, 6:00pm, 3295 Meade Ave, San Diego. In person and on Zoom (email for the link). Next: Mon Dec 14 &amp; Mon Dec 28.</li>
+        <li><strong>Events subcommittee</strong> &mdash; Mondays, 6:00pm, on <a href="https://us06web.zoom.us/j/6703128443?pwd=T1lnTm55WUVYK1EzS0d6YW9JQmg5dz09">Zoom</a>. Next: Mon Dec 7 &amp; Mon Dec 21. This is the crew that plans the dances.</li>
+        <li><strong>SCUBYPAA biz meeting</strong> &mdash; Sundays, 1:00&ndash;3:00pm. Next: Sun Dec 27 &amp; Sun Jan 24. No location is listed on the calendar &mdash; check <a href="https://www.gsdypaa.com/events">gsdypaa.com/events</a>.</li>
+        <li>Questions or want in: <strong>GreaterSanDiegoYoungPeople.AA@gmail.com</strong></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- READING -->
+  <section>
+    <div class="sec-head"><h2 class="sec">Something to read</h2><p>Free &middot; from AA itself</p></div>
+    <div class="card">
+      <div class="card-top"><span class="badge hot">Living Sober</span><span class="badge posted">AA&rsquo;s little book of practical tips</span></div>
+      <h3>Living Sober</h3>
+      <p class="place">First printed 1975 &middot; General Service Conference-approved literature</p>
+      <p class="desc">Short, practical, and funny in places &mdash; hour-by-hour methods for not drinking: the 24-hour plan, what to do at a drinking party, how to handle loneliness, anger, and &ldquo;should I keep liquor in the house?&rdquo; It&rsquo;s the book people hand to newcomers for a reason. AA posts it free on aa.org, split into sections:</p>
+      <ul class="details">
+        <li><a href="https://www.aa.org/sites/default/files/2024-10/b-7_livingsober_1-17_updated_10-2024.pdf"><strong>Pages 1&ndash;17</strong></a> &mdash; how to use the booklet, staying away from the first drink, the 24-hour plan</li>
+        <li><a href="https://www.aa.org/sites/default/files/2021-10/b-7_livingsober_33-49.pdf"><strong>Pages 33&ndash;49</strong></a> &mdash; fending off loneliness, anger and resentments, being good to yourself</li>
+        <li><a href="https://www.aa.org/sites/default/files/2021-10/b-7_livingsober_63-71.pdf"><strong>Pages 63&ndash;71</strong></a> &mdash; being wary of drinking occasions, letting go of old ideas</li>
+        <li><a href="https://www.aa.org/sites/default/files/2021-10/b-7_livingsober_89-92.pdf"><strong>Pages 89&ndash;92</strong></a> &mdash; appendix &amp; the Twelve Steps</li>
+      </ul>
+      <p class="note"><strong>Why links, not a download:</strong> it&rsquo;s AA&rsquo;s copyrighted book, and they give it away free on their own site &mdash; so this page points you to their official copies. AA also posts a free audio version on aa.org.</p>
+    </div>
+    <div class="card">
+      <div class="card-top"><span class="badge hot">Pamphlet P-4</span><span class="badge posted">Written by young members</span></div>
+      <h3><a href="https://www.aa.org/sites/default/files/literature/en_p-4_youngpeopleandaa.pdf">Young People in A.A.</a></h3>
+      <p class="place">Stories from seven young people &mdash; what it was like, what happened, what it&rsquo;s like now</p>
+      <p class="desc">Short, direct, and written for exactly the person reading this page: &ldquo;Coming into A.A. as young people, we found that there were common challenges to face.&rdquo; Free PDF from aa.org.</p>
+      <p class="source"><span class="k">PDF</span><a href="https://www.aa.org/sites/default/files/literature/en_p-4_youngpeopleandaa.pdf">Young People in A.A. (P-4)</a></p>
+    </div>
+  </section>
+
+  <!-- GET HELP -->
+  <section>
+    <div class="sec-head"><h2 class="sec">Right now</h2><p>If today is a hard day</p></div>
+    <div class="grid">
+      <div class="mini">
+        <h3>San Diego AA helpline</h3>
+        <div class="role">24 hours &middot; answered by AA members</div>
+        <p><strong>(619) 265-8762</strong> &mdash; call and talk to a sober alcoholic. No intake, no lecture, just someone who&rsquo;s been there.</p>
+      </div>
+      <div class="mini">
+        <h3><a href="https://www.gsdypaa.com/get-help">Ask GSDYPAA for help</a></h3>
+        <div class="role">Young people&rsquo;s committee</div>
+        <p>There&rsquo;s an &ldquo;ask for help&rdquo; contact on the GSDYPAA site &mdash; a direct line to young sober people in San Diego who will point you at a meeting. Email: <strong>GreaterSanDiegoYoungPeople.AA@gmail.com</strong></p>
+      </div>
+      <div class="mini">
+        <h3>Emergency</h3>
+        <div class="role">If you need medical help to stop drinking</div>
+        <p>Dial <strong>911</strong>. GSDYPAA&rsquo;s own words: there is nothing shameful about seeking medical intervention to detox.</p>
+      </div>
+      <div class="mini">
+        <h3><a href="https://www.aa.org/meeting-guide-app">Meeting Guide app</a></h3>
+        <div class="role">AA&rsquo;s free app &middot; iOS &amp; Android</div>
+        <p>AA&rsquo;s own meeting finder. Filter by <strong>&ldquo;Young People&rdquo;</strong> to see the young meetings near you, anywhere.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>A friend&rsquo;s list &mdash; not affiliated with AA, GSDYPAA, or the San Diego Central Office. Meeting and event details are copied from <a href="https://www.gsdypaa.com/meetings">gsdypaa.com/meetings</a> and <a href="https://www.gsdypaa.com/events">gsdypaa.com/events</a>; confirm before you go.</span>
+    <span>Updated Mon, Nov 23, 2026 &middot; refreshed weekly</span>
+  </footer>
+
+</div>
+</body>
+</html>
