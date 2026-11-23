@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<title>Reader — Young &amp; Sober in San Diego</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700&family=Alegreya+Sans+SC:wght@500;700&family=Unica+One&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#edf1f4; --surface:#ffffff; --ink:#2B3034; --muted:#627C8C; --line:#B9C7D2;
+    --accent:#627C8C; --hot:#E93C35;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#2B3034; --surface:#353c41; --ink:#e9eef2; --muted:#B9C7D2; --line:#4b555d; }
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{background:var(--bg);color:var(--ink);font-family:"Alegreya Sans",system-ui,-apple-system,"Segoe UI",sans-serif;display:flex;flex-direction:column}
+  a{color:inherit}
+  header{background:#627C8C;color:#fff;padding:10px 16px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline}
+  header h1{font-family:"Unica One",sans-serif;font-weight:400;font-size:1.35rem;text-transform:uppercase;letter-spacing:.03em;margin:0;line-height:1.1}
+  header .sub{font-size:.9rem;opacity:.92}
+  header nav{margin-left:auto;display:flex;gap:16px;font-weight:700;font-size:.92rem}
+  header nav a{text-decoration:none}
+  header nav a:hover{text-decoration:underline}
+  main{flex:1;min-height:0;display:flex}
+  iframe{border:0;width:100%;height:100%;background:var(--surface)}
+  .fallback{margin:auto;max-width:34em;padding:32px 20px;text-align:center;color:var(--muted)}
+  .fallback a{color:var(--ink)}
+</style>
+</head>
+<body>
+<header>
+  <h1 id="doc-title">Living Sober</h1>
+  <span class="sub">Free from AA &middot; official copy on aa.org</span>
+  <nav>
+    <a href="index.html">&larr; Back to meetings</a>
+    <a id="orig-link" href="https://www.aa.org/" target="_blank" rel="noopener">Open original PDF &nearr;</a>
+  </nav>
+</header>
+<main id="main"></main>
+<script>
+  // The book lives on AA's own servers and stays there: this page only frames
+  // their official copy in the browser's built-in PDF viewer. Keys map to the
+  // four Living Sober sections linked from index.html.
+  var DOCS = {
+    ls1: { url: "https://www.aa.org/sites/default/files/2024-10/b-7_livingsober_1-17_updated_10-2024.pdf", title: "Living Sober — Pages 1–17" },
+    ls2: { url: "https://www.aa.org/sites/default/files/2021-10/b-7_livingsober_33-49.pdf", title: "Living Sober — Pages 33–49" },
+    ls3: { url: "https://www.aa.org/sites/default/files/2021-10/b-7_livingsober_63-71.pdf", title: "Living Sober — Pages 63–71" },
+    ls4: { url: "https://www.aa.org/sites/default/files/2021-10/b-7_livingsober_89-92.pdf", title: "Living Sober — Pages 89–92" }
+  };
+  var key = new URLSearchParams(location.search).get("doc");
+  var doc = DOCS[key];
+  var main = document.getElementById("main");
+  if (doc) {
+    document.title = doc.title + " — Young & Sober in San Diego";
+    document.getElementById("doc-title").textContent = doc.title;
+    document.getElementById("orig-link").href = doc.url;
+    var frame = document.createElement("iframe");
+    frame.src = doc.url;
+    frame.title = doc.title;
+    main.appendChild(frame);
+  } else {
+    document.getElementById("orig-link").style.display = "none";
+    main.innerHTML = '<div class="fallback"><p>No section was picked. Head back to the <a href="index.html">meetings page</a> and choose a Living Sober section to read.</p></div>';
+  }
+</script>
+</body>
+</html>
