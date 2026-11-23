@@ -57,6 +57,10 @@
 
   /* Cards */
   .card{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
+  .card--slate{background:#627C8C;border-color:#627C8C;color:#fff}
+  .card--slate .place,.card--slate .desc{color:#eef3f6}
+  .card--slate .desc strong{color:#fff}
+  .card--slate .details li::before{color:#fff}
   .card-top{padding:18px 20px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
   .badge{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:5px 9px;border-radius:5px}
   .badge.hot{background:var(--hot);color:#fff}
@@ -227,7 +231,7 @@
   <!-- READING -->
   <section>
     <div class="sec-head"><h2 class="sec">Something to read</h2><p>Free &middot; from AA itself</p></div>
-    <div class="card">
+    <div class="card card--slate">
       <div class="card-top"><span class="badge hot">Living Sober</span><span class="badge posted">AA&rsquo;s little book of practical tips</span></div>
       <h3>Living Sober</h3>
       <p class="place">First printed 1975 &middot; General Service Conference-approved literature</p>
