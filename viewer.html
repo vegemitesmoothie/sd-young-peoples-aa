@@ -26,47 +26,159 @@
   header nav{margin-left:auto;display:flex;gap:16px;font-weight:700;font-size:.92rem}
   header nav a{text-decoration:none}
   header nav a:hover{text-decoration:underline}
-  main{flex:1;min-height:0;display:flex}
-  iframe{border:0;width:100%;height:100%;background:var(--surface)}
+  .toolbar{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;justify-content:center;padding:12px 16px 4px}
+  .toolbar button{
+    font-family:"Alegreya Sans",system-ui,sans-serif;font-weight:700;font-size:.95rem;
+    background:#627C8C;color:#fff;border:0;border-radius:10px;padding:9px 18px;cursor:pointer;
+    text-transform:uppercase;letter-spacing:.04em;
+  }
+  .toolbar button:first-of-type{background:var(--hot)}
+  .toolbar button:disabled{opacity:.45;cursor:default}
+  .toolbar .pageno{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.9rem;color:var(--muted)}
+  .toolbar .hint{font-size:.9rem;color:var(--muted)}
+  main{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:8px 12px 20px}
+  #book{width:100%;height:100%}
+  #status{margin:auto;max-width:34em;padding:32px 20px;text-align:center;color:var(--muted)}
+  #status .bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-top:14px}
+  #status .bar i{display:block;height:100%;width:0;background:var(--hot)}
   .fallback{margin:auto;max-width:34em;padding:32px 20px;text-align:center;color:var(--muted)}
   .fallback a{color:var(--ink)}
+  #plain{width:100%;height:100%;border:0;display:none;background:var(--surface)}
 </style>
 </head>
 <body>
 <header>
   <h1 id="doc-title">Living Sober</h1>
-  <span class="sub">Free from AA &middot; official copy on aa.org</span>
+  <span class="sub">A page-flip book &middot; drag a corner, tap an arrow, or use &larr; &rarr;</span>
   <nav>
     <a href="index.html">&larr; Back to meetings</a>
-    <a id="orig-link" href="https://www.aa.org/" target="_blank" rel="noopener">Open original PDF &nearr;</a>
+    <a href="living-sober.pdf" target="_blank" rel="noopener">Plain PDF</a>
+    <a id="orig-link" href="https://www.aa.org/" target="_blank" rel="noopener">Original on aa.org &nearr;</a>
   </nav>
 </header>
-<main id="main"></main>
+<div class="toolbar">
+  <button id="prev" type="button" disabled>&larr; Prev</button>
+  <span class="pageno" id="pageno">Loading&hellip;</span>
+  <button id="next" type="button" disabled>Next &rarr;</button>
+  <span class="hint">Click a page corner to flip, or swipe on touch.</span>
+</div>
+<main id="main">
+  <div id="status"><p id="status-text">Preparing the book&hellip;</p><div class="bar"><i id="bar"></i></div>
+    <p><a href="living-sober.pdf" target="_blank" rel="noopener">Just open the plain PDF instead</a></p></div>
+  <div id="book" hidden></div>
+  <iframe id="plain" title="Living Sober — plain PDF"></iframe>
+</main>
+<script src="vendor/pdf.min.js"></script>
+<script src="vendor/page-flip.browser.js"></script>
 <script>
-  // The book lives on AA's own servers and stays there: this page only frames
-  // their official copy in the browser's built-in PDF viewer. Keys map to the
-  // four Living Sober sections linked from index.html.
+  // The book now lives on this site (Noodle's own copy, uploaded Nov 23, 2026),
+  // so the flipbook reads it same-origin: no CORS wall, and the pages genuinely flip.
+  // pdf.js renders each page to an image; StPageFlip (vanilla JS, no jQuery, no
+  // three.js) turns those images into a book. If either library fails to load,
+  // the plain PDF opens instead — the reader never strands anyone.
   var DOCS = {
-    ls1: { url: "https://www.aa.org/sites/default/files/2024-10/b-7_livingsober_1-17_updated_10-2024.pdf", title: "Living Sober — Pages 1–17" },
-    ls2: { url: "https://www.aa.org/sites/default/files/2021-10/b-7_livingsober_33-49.pdf", title: "Living Sober — Pages 33–49" },
-    ls3: { url: "https://www.aa.org/sites/default/files/2021-10/b-7_livingsober_63-71.pdf", title: "Living Sober — Pages 63–71" },
-    ls4: { url: "https://www.aa.org/sites/default/files/2021-10/b-7_livingsober_89-92.pdf", title: "Living Sober — Pages 89–92" }
+    ls1: { start: 7,  title: "Living Sober — Pages 1–17",  orig: "https://www.aa.org/sites/default/files/2024-10/b-7_livingsober_1-17_updated_10-2024.pdf" },
+    ls2: { start: 39, title: "Living Sober — Pages 33–49", orig: "https://www.aa.org/sites/default/files/2021-10/b-7_livingsober_33-49.pdf" },
+    ls3: { start: 69, title: "Living Sober — Pages 63–71", orig: "https://www.aa.org/sites/default/files/2021-10/b-7_livingsober_63-71.pdf" },
+    ls4: { start: 91, title: "Living Sober — Pages 89–92", orig: "https://www.aa.org/sites/default/files/2021-10/b-7_livingsober_89-92.pdf" }
   };
+  // Start pages are PDF page numbers, not the book's printed numbers: the printed
+  // text starts on PDF page 7 ("1 Using this booklet"), so printed pN = PDF pN+6.
+  // Body text ends on PDF p90 (printed p84); the Appendix restarts numbering
+  // on PDF p91, so ls4 opens there.
   var key = new URLSearchParams(location.search).get("doc");
-  var doc = DOCS[key];
-  var main = document.getElementById("main");
-  if (doc) {
-    document.title = doc.title + " — Young & Sober in San Diego";
-    document.getElementById("doc-title").textContent = doc.title;
-    document.getElementById("orig-link").href = doc.url;
-    var frame = document.createElement("iframe");
-    frame.src = doc.url;
-    frame.title = doc.title;
-    main.appendChild(frame);
-  } else {
-    document.getElementById("orig-link").style.display = "none";
-    main.innerHTML = '<div class="fallback"><p>No section was picked. Head back to the <a href="index.html">meetings page</a> and choose a Living Sober section to read.</p></div>';
+  var doc = DOCS[key] || { start: 1, title: "Living Sober", orig: "https://www.aa.org/" };
+  document.title = doc.title + " — Young & Sober in San Diego";
+  document.getElementById("doc-title").textContent = doc.title;
+  document.getElementById("orig-link").href = doc.orig;
+
+  var statusEl = document.getElementById("status");
+  var statusText = document.getElementById("status-text");
+  var bar = document.getElementById("bar");
+  var bookEl = document.getElementById("book");
+  var pageno = document.getElementById("pageno");
+  var prevBtn = document.getElementById("prev");
+  var nextBtn = document.getElementById("next");
+
+  function showPlainPDF(msg) {
+    statusEl.style.display = "none";
+    bookEl.hidden = true;
+    var frame = document.getElementById("plain");
+    frame.style.display = "block";
+    frame.src = "living-sober.pdf";
+    pageno.textContent = msg || "Plain PDF view";
+    prevBtn.disabled = true;
+    nextBtn.disabled = true;
   }
+
+  function setPageLabel(idx, total) {
+    pageno.textContent = "Page " + (idx + 1) + " of " + total;
+    prevBtn.disabled = idx <= 0;
+    nextBtn.disabled = idx >= total - 1;
+  }
+
+  async function build() {
+    if (typeof pdfjsLib === "undefined" || typeof St === "undefined" || !St.PageFlip) {
+      showPlainPDF("Plain PDF view — flipbook libraries did not load");
+      return;
+    }
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "vendor/pdf.worker.min.js";
+    var pdf;
+    try {
+      pdf = await pdfjsLib.getDocument("living-sober.pdf").promise;
+    } catch (e) {
+      showPlainPDF("Plain PDF view — the book did not load as a flipbook");
+      return;
+    }
+    var total = pdf.numPages;
+    var images = [];
+    for (var n = 1; n <= total; n++) {
+      statusText.textContent = "Preparing the book… page " + n + " of " + total;
+      bar.style.width = Math.round((n / total) * 100) + "%";
+      var page = await pdf.getPage(n);
+      var viewport = page.getViewport({ scale: 500 / page.getViewport({ scale: 1 }).width });
+      var canvas = document.createElement("canvas");
+      canvas.width = Math.round(viewport.width);
+      canvas.height = Math.round(viewport.height);
+      await page.render({ canvasContext: canvas.getContext("2d"), viewport: viewport }).promise;
+      images.push(canvas.toDataURL("image/jpeg", 0.82));
+      await new Promise(function (r) { setTimeout(r, 0); });
+    }
+    statusEl.style.display = "none";
+    bookEl.hidden = false;
+    var flip = new St.PageFlip(bookEl, {
+      width: 450, height: 640,
+      size: "stretch",
+      minWidth: 315, maxWidth: 1000,
+      minHeight: 420, maxHeight: 1350,
+      maxShadowOpacity: 0.5,
+      showCover: true,
+      mobileScrollSupport: true,
+      usePortrait: true,
+      swipeDistance: 30,
+      showPageCorners: true,
+      disableFlipByClick: false
+    });
+    flip.loadFromImages(images);
+    flip.on("flip", function (e) {
+      var idx = typeof e === "number" ? e : (e && typeof e.data === "number" ? e.data : flip.getCurrentPageIndex());
+      setPageLabel(idx, total);
+    });
+    flip.on("init", function () { setPageLabel(flip.getCurrentPageIndex(), total); });
+    var startIdx = Math.min(Math.max(doc.start - 1, 0), total - 1);
+    if (startIdx > 0) {
+      if (typeof flip.turnToPage === "function") flip.turnToPage(startIdx);
+      else if (typeof flip.flipToPage === "function") flip.flipToPage(startIdx);
+    }
+    setPageLabel(startIdx, total);
+    prevBtn.addEventListener("click", function () { flip.turnToPrevPage(); });
+    nextBtn.addEventListener("click", function () { flip.turnToNextPage(); });
+    document.addEventListener("keydown", function (ev) {
+      if (ev.key === "ArrowLeft") flip.turnToPrevPage();
+      if (ev.key === "ArrowRight") flip.turnToNextPage();
+    });
+  }
+  build();
 </script>
 </body>
 </html>
